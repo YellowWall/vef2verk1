@@ -52,7 +52,7 @@ export function tablemake(data){
         };
         table +=~`
             <td>
-            <link href:"${rowCell[rowCells.length-1]}">Síða Námskeiðs</link>
+            <link href="${rowCell[rowCells.length-1]}">Síða Námskeiðs</link>
             </td>`;
         table += `
         </tr>`;
