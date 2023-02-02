@@ -34,6 +34,7 @@ export function tablemake(data){
         <th>Einingar</th>
         <th>Kennslumisseri</th>
         <th>Námstig</th>
+        <th>Linkur</th>
     </tr>
     </thead>`;
     for (var singleRow =0; singleRow<data.length; singleRow++){
