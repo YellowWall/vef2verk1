@@ -1,59 +1,65 @@
-import {fs,mkdir,writeFile} from "fs/promises";
-import path, {join} from "path";
-import {tablemake,pagetemp,hero} from "./lib/html.js";
-import {direxists, readFile, readFilesFromDir} from './lib/calculator.js';
-import { join } from "path";
+import { mkdir ,writeFile} from "fs/promises";
+import path,{join} from "path";
+import {indMake, indentry,tablemake,pagetemp,hero} from "./lib/html.js";
+import { csvformat, direxists, readFile, readFilesFromDir} from './lib/file.js';
 
 const data_dir = './data';
-const output_dir = './dir';
-let csvreq = "laeknadeild.csv";
+const output_dir = './dist';
 
 async function main(){
-    if(!(await direxists(output_dir))){
-        await mkdir(output_dir);
+    //athugum hvort við séum með rétta directoryið
+    if (!(await direxists(output_dir))){
+       await mkdir(output_dir);
     };
     const dataFiles = await readFilesFromDir(data_dir);
     const fileread = whichfile();
     var indexskra = null;
-    for(const ind of datafiles){
+    for(const ind of dataFiles){
         if(path.basename(ind) == "index.json"){
             indexskra = ind;
-        };
+        }
     };
     if(indexskra==null){
         throw console.error("Fann ekki indexskrá");
     };
-
+    var ind = '';
     for (const file of dataFiles){
-        if(fileread == path.basename(file) ){
-            const content = await readFile(file);
-            const table = tablemake(content);
-            const filename = '${fileread}.html';
-            
+        if(path.basename(file)=='index.json'){
+            continue;
+        }
+        const content = await readFile(file,{encoding: 'binary'});
+        const arr = await csvformat(content,"");
+        if(arr !== null){
+            const table = tablemake(arr);
+            const filename = `${path.basename(file).split('.')[0]}.html`;
             const titdesc = await jsonread(indexskra,fileread);
             const title = titdesc[0];
             const herobox = hero(titdesc[0],titdesc[1]);
             const body = herobox + table;
-            console.log(title);
-            console.log(description);
-            console.log(filepath);
             const mypage = pagetemp(title,body);
             const filepath = join(output_dir,filename);
             await writeFile(filepath, mypage, {flag: 'w+'});
+            ind += indentry(titdesc[0],filename);
         };
        
     };
-    
-}
-function jsonread(file,a){
-    var items = [];
-    const entries = JSON.parse(file);
-    for(entry of entries){
+    if(ind !== ''){
+        ind = indMake(ind);
+        const indpage = pagetemp("Index", ind);
+        const indpath = join(output_dir,"Index.html");
+        await writeFile(indpath,indpage,{flag:'w+'});
+    }
+};
+async function jsonread(file,a){
+    const data = await readFile(file);
+    const entries = JSON.parse(data);
+    for(const entry of entries){
         if(entry.csv == a){
             return [entry.title,entry.description];
         }
     }
 }
+main().catch((err) => console.error(err));
 
 //let file = read("/laeknadeild.csv")  
 function whichfile(){

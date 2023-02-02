@@ -19,5 +19,8 @@
   "homepage": "https://github.com/YellowWall/vef2verk1#readme",
   "devDependencies": {
     "@types/node": "^18.11.18"
+  },
+  "dependencies": {
+    "jest": "^29.4.1"
   }
 }
