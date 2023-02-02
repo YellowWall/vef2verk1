@@ -43,19 +43,22 @@ html {
     font-weight: bold;
   }
   
-  dl {
+  table {
     display: grid;
     gap: 0.5rem;
     grid-template-columns: 33% auto;
   }
   
-  dt {
+  th {
     font-weight: bold;
     grid-column: 1;
   }
   
-  dd {
+  td {
     grid-column: 2;
+  }
+  td a {
+    font-weight: bold;
   }
   
   .numbers {
