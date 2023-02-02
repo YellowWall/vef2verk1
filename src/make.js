@@ -9,12 +9,12 @@ const output_dir = './dist';
 async function main(){
     //athugum hvort við séum með rétta directoryið
     if (!(await direxists(output_dir))){
-       await mkdir(output_dir);
+        await mkdir(output_dir);
     };
     const dataFiles = await readFilesFromDir(data_dir);
-    const fileread = whichfile();
     var indexskra = null;
     for(const ind of dataFiles){
+        console.log(path.basename(ind));
         if(path.basename(ind) == "index.json"){
             indexskra = ind;
         }
@@ -32,7 +32,7 @@ async function main(){
         if(arr !== null){
             const table = tablemake(arr);
             const filename = `${path.basename(file).split('.')[0]}.html`;
-            const titdesc = await jsonread(indexskra,fileread);
+            const titdesc = await jsonread(indexskra,path.basename(file));
             const title = titdesc[0];
             const herobox = hero(titdesc[0],titdesc[1]);
             const body = herobox + table;
@@ -60,22 +60,6 @@ async function jsonread(file,a){
     }
 }
 main().catch((err) => console.error(err));
-
-//let file = read("/laeknadeild.csv")  
-function whichfile(){
-    return csvreq;
-}
-
-//fs.readFile(csvreq,function read(err,data){
-//    if (err){
-//        throw err;
-//    }
-//    const content = data;
-//    console.log(content);
-//    tablemake(content);
-//});
-
-
 //smíðum algjöran grunn html
 //tökum við csv skránni til að lesa úr henni
 //búum til titil á síðu

@@ -3,6 +3,7 @@ import { join } from 'path';
 export async function direxists(dir){
     try{
         const info = await statusbar(dir);
+        console.log(info.isDirectory);
         return info.isDirectory();
     } catch(e){
         return false;
