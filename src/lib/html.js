@@ -53,7 +53,7 @@ export function tablemake(data){
         console.log()
         table += `
             <td>
-            <link href="${rowCells[rowCells.length-1]}">Síða Námskeiðs</link>
+            <a href="${rowCells[rowCells.length-1]}">Síða Námskeiðs</a>
             </td>`;
         table += `
         </tr>`;
