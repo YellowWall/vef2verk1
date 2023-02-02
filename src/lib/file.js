@@ -3,7 +3,7 @@ import { join } from 'path';
 export async function direxists(dir){
     try{
         const info = await statusbar(dir);
-        console.log(info.isDirectory);
+        console.log(info.isDirectory());
         return info.isDirectory();
     } catch(e){
         return false;
@@ -12,23 +12,24 @@ export async function direxists(dir){
 export async function csvformat(content,sort){
     const data = content.split(/\r?\n|\r/);
     if(data.length < 2){
-        console.log('fokk 1');
         return null;
     };
     console.log(data.type);
     console.log(data.length);
     console.log(data[0].split(';').length)
     var ret = new Array();
+    //ef skráin er rétt byrjar hún á þennan hátt
     if(!(data[0]=='Númer;Heiti;Einingar;Kennslumisseri;Námstig;')){
-        console.log('fokk 2');
         return null;
     };
     var i = 0;
     for(const line of data){
+        //sleppum fyrstu línu
         if(line == data[0]){
             continue;
         };
         var readline = line.split(';');
+
         if((readline.length < 5) || (readline.length > 6) ){
             continue;
         };if(!(namskeidsnum(readline[0]))){
@@ -50,13 +51,12 @@ export async function csvformat(content,sort){
     };
     if(i>0){
         return ret;
-    }else {console.log("fokk 3");
+    }else {
         return null;};
 
 }
 function formatNum(num){
     if(num == undefined){
-        console.log("undef");
         return null;
     }
     //if(typeof num !== 'number'){
