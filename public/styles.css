@@ -43,17 +43,12 @@ html {
     font-weight: bold;
   }
   
-  table {
-    display: grid;
-    gap: 0.5rem;
-    
-  }
-  
   th {
     font-weight: bold;
   }
 
   td a {
+
     font-weight: bold;
   }
   
