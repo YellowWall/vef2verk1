@@ -64,7 +64,7 @@ function formatNum(num){
         //return null;
     //}
     var ret = parseFloat(num).toLocaleString('is');
-    return Number(ret.split(',')[0]);
+    return ret.split(',')[0];
 
 }
 //Regex til að athuga hvort námskeiðsnúmer sé á réttu formi

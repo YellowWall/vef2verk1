@@ -49,10 +49,11 @@ export function tablemake(data){
             <td>`;
             table += rowCells[rowCell];
             table += ` </td>`;
-        };
-        table +=~`
+        }
+        console.log()
+        table += `
             <td>
-            <link href="${rowCell[rowCells.length-1]}">Síða Námskeiðs</link>
+            <link href="${rowCells[rowCells.length-1]}">Síða Námskeiðs</link>
             </td>`;
         table += `
         </tr>`;
