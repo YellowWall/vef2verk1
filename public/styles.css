@@ -14,7 +14,7 @@ html {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
     margin: 0 auto;
-    max-width: 900px;
+    max-width: 1500px;
     padding: 1rem;
   }
   
@@ -46,17 +46,13 @@ html {
   table {
     display: grid;
     gap: 0.5rem;
-    grid-template-columns: 33% auto;
+    
   }
   
   th {
     font-weight: bold;
-    grid-column: 1;
   }
-  
-  td {
-    grid-column: 2;
-  }
+
   td a {
     font-weight: bold;
   }
